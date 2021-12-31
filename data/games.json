@@ -1,0 +1,58 @@
+{
+    ":regional_indicator_a:": {
+        "roleName": "Games General",
+        "emoji": "🇦"
+    },
+    ":regional_indicator_b:": {
+        "roleName": "CS:GO",
+        "emoji": "🇧"
+    },
+    ":regional_indicator_c:": {
+        "roleName": "Rocket League",
+        "emoji": "🇨"
+    },
+    ":regional_indicator_d:": {
+        "roleName": "Age of Empires",
+        "emoji": "🇩"
+    },
+    ":regional_indicator_e:": {
+        "roleName": "Overwatch",
+        "emoji": "🇪"
+    },
+    ":regional_indicator_f:": {
+        "roleName": "Halo",
+        "emoji": "🇫"
+    },
+    ":regional_indicator_g:": {
+        "roleName": "Ball Games",
+        "emoji": "🇬"
+    },
+    ":regional_indicator_h:": {
+        "roleName": "Call of Duty",
+        "emoji": "🇭"
+    },
+    ":regional_indicator_i:": {
+        "roleName": "Paradox",
+        "emoji": "🇮"
+    },
+    ":regional_indicator_j:": {
+        "roleName": "Worms",
+        "emoji": "🇯"
+    },
+    ":regional_indicator_k:": {
+        "roleName": "R6 Siege",
+        "emoji": "🇰"
+    },
+    ":regional_indicator_l:": {
+        "roleName": "Valorant",
+        "emoji": "🇱"
+    },
+    ":regional_indicator_m:": {
+        "roleName": "Battlefield",
+        "emoji": "🇲"
+    },
+    ":regional_indicator_n:": {
+        "roleName": "Battle Royale Games",
+        "emoji": "🇳"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    ":red_circle:": {
+        "roleName": "He/Him",
+        "emoji": "🔴"
+    },
+    ":red_square:": {
+        "roleName": "He/They",
+        "emoji": "🟥"
+    },
+    ":blue_circle:": {
+        "roleName": "She/Her",
+        "emoji": "🔵"
+    },
+    ":blue_square:": {
+        "roleName": "She/They",
+        "emoji": "🟦"
+    },
+    ":orange_circle:": {
+        "roleName": "They/Them",
+        "emoji": "🟠"
+    },
+    ":orange_square:": {
+        "roleName": "They/He",
+        "emoji": "🟧"
+    },
+    ":large_orange_diamond:": {
+        "roleName": "They/She",
+        "emoji": "🔶"
+    },
+    ":infinity:": {
+        "roleName": "Any Pronouns",
+        "emoji": "♾️"
+    }
+}

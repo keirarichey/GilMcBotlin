@@ -1,0 +1,34 @@
+{
+    ":regional_indicator_a:": {
+        "roleName": "Heat",
+        "emoji": "🇦"
+    },
+    ":regional_indicator_b:": {
+        "roleName": "Hurricanes",
+        "emoji": "🇧"
+    },
+    ":regional_indicator_c:": {
+        "roleName": "Renegades",
+        "emoji": "🇨"
+    },
+    ":regional_indicator_d:": {
+        "roleName": "Scorchers",
+        "emoji": "🇩"
+    },
+    ":regional_indicator_e:": {
+        "roleName": "Sixers",
+        "emoji": "🇪"
+    },
+    ":regional_indicator_f:": {
+        "roleName": "Stars",
+        "emoji": "🇫"
+    },
+    ":regional_indicator_g:": {
+        "roleName": "Strikers",
+        "emoji": "🇬"
+    },
+    ":regional_indicator_h:": {
+        "roleName":"Thunder",
+        "emoji": "🇭"
+    }
+}

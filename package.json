@@ -1,0 +1,23 @@
+{
+  "name": "gil_mcbotlin",
+  "version": "1.0.0",
+  "description": "Discord Bot for the r/AFL Discord server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZedFish/GillonMcBotlin"
+  },
+  "author": "mrichey",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.10.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.0",
+    "discord.js": "^13.4.0",
+    "sequelize": "^6.12.4",
+    "sqlite3": "^5.0.2"
+  }
+}

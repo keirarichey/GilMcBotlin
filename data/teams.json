@@ -1,0 +1,56 @@
+{
+    "crows": {
+        "roleName": "Adelaide"
+    },
+    "lions": {
+        "roleName": "Brisbane"
+    },
+    "blues": {
+        "roleName": "Carlton"
+    },
+    "pies": {
+        "roleName": "Collingwood"
+    },
+    "dons": {
+        "roleName": "Essendon"
+    },
+    "freo": {
+        "roleName": "Fremantle"
+    },
+    "cats": {
+        "roleName": "Geelong"
+    },
+    "suns": {
+        "roleName": "Gold Coast"
+    },
+    "gws": {
+        "roleName": "GWS"
+    },
+    "hawks": {
+        "roleName": "Hawthorn"
+    },
+    "dees": {
+        "roleName": "Melbourne"
+    },
+    "norf": {
+        "roleName": "North Melbourne"
+    },
+    "port": {
+        "roleName": "Port Adelaide"
+    },
+    "tigers": {
+        "roleName": "Richmond"
+    },
+    "saints": {
+        "roleName": "St Kilda"
+    },
+    "swans": {
+        "roleName": "Sydney"
+    },
+    "eagles": {
+        "roleName": "West Coast"
+    },
+    "dogs": {
+        "roleName": "Western Bulldogs"
+    }
+}
