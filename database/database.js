@@ -6,7 +6,6 @@ module.exports = new Sequelize(databaseName, userName, userPassword, {
         dialect: 'mysql',
         logging: false,
         dialectOptions: {
-            charset: 'utf8',
-            collate: 'utf8_general_ci'
+            charset: 'utf8'
         }
     });
