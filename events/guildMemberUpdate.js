@@ -47,8 +47,10 @@ module.exports = {
     async execute(oldMember, newMember) {
         if (oldMember.partial) {
             try {
+                console.log(oldMember)
                 console.log("fetching oldMember: ", oldMember.displayName)
-                await guild.members.fetch({user: oldMember, force: true});
+                await oldMember.fetch();
+                await oldMember.guild.members.fetch({user: oldMember, force: true});
                 ;
             }
             catch (err) {
@@ -59,7 +61,8 @@ module.exports = {
         if (newMember.partial) {
             try {
                 console.log("fetching newMember: ", oldMember.displayName)
-                await guild.members.fetch({user: newMember, force: true});
+                await newMember.fetch();
+                await newMember.guild.members.fetch({user: newMember, force: true});
             }
             catch (err) {
                 console.error(err);
