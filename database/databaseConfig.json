@@ -1,6 +1,6 @@
 {
     "databaseName": "gilmcbotlin_database",
-    "hostName": "localhost",
+    "hostName": "127.0.0.1",
     "userName": "gilmcbotlin",
     "userPassword": "gilmcbotlin"
 }
