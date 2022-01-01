@@ -45,7 +45,7 @@ module.exports = {
     name: 'guildMemberUpdate',
     once: false,
     async execute(oldMember, newMember) {
-        if (oldmember.partial) {
+        if (oldMember.partial) {
             return;
         }
         if (newMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName) && !oldMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
