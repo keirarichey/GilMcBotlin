@@ -9,7 +9,7 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
 }
 
-const removeRoleFromEmojiMap = function(reaction, member, emojiMap) {
+const removeRoleFromEmojiMap = async function(reaction, member, emojiMap) {
     /* Syntax of emojiMap:
         emojiMap = {
             "emojiName": { roleName: "roleName", emoji: "✅" },
@@ -73,19 +73,19 @@ module.exports = {
         if (roleMessage) {
             switch (roleMessage.dataValues.roleType) {
                 case 'team':
-                    removeRoleFromEmojiMap(messageReaction, reactionGuildMember, teamEmojis);
+                    await removeRoleFromEmojiMap(messageReaction, reactionGuildMember, teamEmojis);
                     break;
 
                 case 'game':
-                    removeRoleFromEmojiMap(messageReaction, reactionGuildMember, gameEmojis);
+                    await removeRoleFromEmojiMap(messageReaction, reactionGuildMember, gameEmojis);
                     break;
 
                 case 'bbl':
-                    removeRoleFromEmojiMap(messageReaction, reactionGuildMember, bblEmojis);
+                    await removeRoleFromEmojiMap(messageReaction, reactionGuildMember, bblEmojis);
                     break;
 
                 case 'pronoun':
-                    removeRoleFromEmojiMap(messageReaction, reactionGuildMember, pronounEmojis);
+                    await removeRoleFromEmojiMap(messageReaction, reactionGuildMember, pronounEmojis);
                     break;
             }
         }
