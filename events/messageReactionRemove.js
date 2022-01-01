@@ -16,6 +16,16 @@ const removeRoleFromEmojiMap = function(reaction, member, emojiMap) {
             etc., where emojiName is unicode, otherwise it is left out
         }
     */
+    if (member.partial) {
+        try {
+            await member.fetch();
+        }
+        catch (err) {
+            console.error(err);
+            return;
+        }
+    }
+
     const emojiKeys = Object.keys(emojiMap);
     const roleEmojiKey = emojiKeys.find(key => emojiMap[key].emoji === reaction.emoji.name || key === reaction.emoji.name);
     const roleName = emojiMap[roleEmojiKey].roleName;
@@ -37,6 +47,7 @@ module.exports = {
     name: 'messageReactionRemove',
     once: false,
     async execute(messageReaction, user) {
+
         if (user.bot) {
             return;
         }

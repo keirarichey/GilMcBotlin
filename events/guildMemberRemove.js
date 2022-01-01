@@ -46,6 +46,16 @@ module.exports = {
     name: 'guildMemberRemove',
     once: false,
     async execute(guildMember) {
+        if (guildMember.partial) {
+            try {
+                await guildMember.fetch();
+            }
+            catch (err) {
+                console.error(err);
+                return;
+            }
+        }
+
         if (guildMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
             // If someone has been given the entry role
             await postExitMessage(guildMember)

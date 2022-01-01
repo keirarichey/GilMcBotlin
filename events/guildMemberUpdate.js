@@ -45,6 +45,25 @@ module.exports = {
     name: 'guildMemberUpdate',
     once: false,
     async execute(oldMember, newMember) {
+        if (oldMember.partial) {
+            try {
+                await oldMember.fetch();
+            }
+            catch (err) {
+                console.error(err);
+                return;
+            }
+        }
+        if (newMember.partial) {
+            try {
+                await newMember.fetch();
+            }
+            catch (err) {
+                console.error(err);
+                return;
+            }
+        }
+        
         if (newMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName) && !oldMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
             // If someone has been given the entry role
             await postEntryMessage(newMember)
