@@ -66,7 +66,7 @@ module.exports = {
         
         if (newMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName) && !oldMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
             // If someone has been given the entry role
-            console.log(newMember.role.cache, oldMember.roles.cache);
+            console.log(newMember.roles.roles.cache);
             await postEntryMessage(newMember)
                 .catch(err => console.error(err));
         }
