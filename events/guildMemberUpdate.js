@@ -49,8 +49,7 @@ module.exports = {
             try {
                 console.log("fetching oldMember: ", oldMember.displayName)
                 console.log(typeof oldMember)
-                await oldMember.fetch();
-                await oldMember.guild.members.fetch({user: oldMember, force: true});
+                await oldMember.guild.members.fetch({user: oldMember.id, force: true});
             }
             catch (err) {
                 console.error(err);
@@ -60,8 +59,7 @@ module.exports = {
         if (newMember.partial) {
             try {
                 console.log("fetching newMember: ", oldMember.displayName)
-                await newMember.fetch();
-                await newMember.guild.members.fetch({user: newMember, force: true});
+                await newMember.guild.members.fetch({user: newMember.id, force: true});
             }
             catch (err) {
                 console.error(err);
@@ -76,6 +74,7 @@ module.exports = {
             oldMember.roles.cache.forEach(role => console.log(role.name));
             console.log("new")
             newMember.roles.cache.forEach(role => console.log(role.name));
+            console.log()
             await postEntryMessage(newMember)
                 .catch(err => console.error(err));
         }
