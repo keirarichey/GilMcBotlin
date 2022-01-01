@@ -4,5 +4,9 @@ const { databaseName, userName, userPassword, hostName } = require('./databaseCo
 module.exports = new Sequelize(databaseName, userName, userPassword, {
         host: hostName,
         dialect: 'mysql',
-        logging: false
+        logging: false,
+        dialectOptions: {
+            charset: 'utf8',
+            collate: 'utf8_general_ci'
+        }
     });
