@@ -1,6 +1,6 @@
 {
-    "databaseName": "gilDatabase",
+    "databaseName": "gilmcbotlin_database",
     "hostName": "localhost",
-    "userName": "admin",
-    "userPassword": "admin"
+    "userName": "gilmcbotlin",
+    "userPassword": "gilmcbotlin"
 }

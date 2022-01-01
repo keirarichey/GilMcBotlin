@@ -3,7 +3,6 @@ const { databaseName, userName, userPassword, hostName } = require('./databaseCo
 
 module.exports = new Sequelize(databaseName, userName, userPassword, {
         host: hostName,
-        dialect: 'sqlite',
-        logging: false,
-        storage: 'database/database.sqlite'
+        dialect: 'mysql',
+        logging: false
     });
