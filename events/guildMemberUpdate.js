@@ -47,6 +47,7 @@ module.exports = {
     async execute(oldMember, newMember) {
         if (oldMember.partial) {
             try {
+                console.log("fetching oldMember: ", oldMember.displayName)
                 await oldMember.fetch();
             }
             catch (err) {
@@ -56,6 +57,7 @@ module.exports = {
         }
         if (newMember.partial) {
             try {
+                console.log("fetching newMember: ", oldMember.displayName)
                 await newMember.fetch();
             }
             catch (err) {
@@ -66,7 +68,7 @@ module.exports = {
         
         if (newMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName) && !oldMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
             // If someone has been given the entry role
-            console.log(oldMember.toString());
+            console.log(oldMember.displayName);
             console.log("old")
             oldMember.roles.cache.forEach(role => console.log(role.name));
             console.log("new")
