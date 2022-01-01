@@ -47,11 +47,10 @@ module.exports = {
     async execute(oldMember, newMember) {
         if (oldMember.partial) {
             try {
-                console.log(oldMember)
                 console.log("fetching oldMember: ", oldMember.displayName)
+                console.log(typeof oldMember)
                 await oldMember.fetch();
                 await oldMember.guild.members.fetch({user: oldMember, force: true});
-                ;
             }
             catch (err) {
                 console.error(err);
