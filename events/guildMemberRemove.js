@@ -5,8 +5,7 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
 }
 
-const postExitMessage = async function(guildMember) {
-    const guild = guildMember.guild;
+const postExitMessage = async function(guild, guildMember, isPartial) {
     const defaultChannel = guild.channels.cache.find(channel => channel.name === defaultChannelName && channel.type === 'GUILD_TEXT');
 
     if (!defaultChannel) {
@@ -31,6 +30,7 @@ const postExitMessage = async function(guildMember) {
     const exitMessage = exitMessages[randomExitMessageIndex];
 
     const embed = new MessageEmbed()
+        .setTitle(`Goodbye ${isPartial ? guildMember.name : guildMember.displayName}`)
         .setColor(0xe24540) // red
         .setDescription(exitMessage);
 
@@ -47,18 +47,16 @@ module.exports = {
     once: false,
     async execute(guildMember) {
         if (guildMember.partial) {
-            try {
-                await guildMember.fetch();
-            }
-            catch (err) {
-                console.error(err);
-                return;
-            }
+            // if partial, the member is already gone and fetching won't do anything (see also ./messageDelete.js)
+            // instead, try and use whatever info is in the Partial data to send messages
+            await postExitMessage(guildMember.guild, guildMember.user, guildMember.partial)
+            .catch(err => console.error(err));
+            return;
         }
 
         if (guildMember.roles.cache.some(role => removeEmojis(role.name) === entryRoleName)) {
             // If someone has been given the entry role
-            await postExitMessage(guildMember)
+            await postExitMessage(guildMember.guild, guildMember, guildMember.partial)
                 .catch(err => console.error(err));
         }
     }
