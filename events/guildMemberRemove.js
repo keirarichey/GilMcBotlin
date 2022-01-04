@@ -5,7 +5,7 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
 }
 
-const postExitMessage = async function(guild, guildMember, isPartial) {
+const postExitMessage = async function(guild, memberOrUser, isPartial) {
     const defaultChannel = guild.channels.cache.find(channel => channel.name === defaultChannelName && channel.type === 'GUILD_TEXT');
 
     if (!defaultChannel) {
@@ -23,14 +23,14 @@ const postExitMessage = async function(guild, guildMember, isPartial) {
     const exitMessageEmoji = exitMessageEmojis[randomexitEmojiIndex];
 
     const exitMessages = [
-        `**${exitMessageEmoji} ${guildMember.toString()} has left ${guild.name}. Let's all join in chairing them off.**`,
-        `**${exitMessageEmoji} ${guildMember.toString()} has retired from ${guild.name}. Let's celebrate their long and successful career by chairing them off.**`,
+        `**${exitMessageEmoji} ${memberOrUser.toString()} has left ${guild.name}. Let's all join in chairing them off.**`,
+        `**${exitMessageEmoji} ${memberOrUser.toString()} has retired from ${guild.name}. Let's celebrate their long and successful career by chairing them off.**`,
     ];
     const randomExitMessageIndex = Math.floor(exitMessages.length * Math.random());
     const exitMessage = exitMessages[randomExitMessageIndex];
 
     const embed = new MessageEmbed()
-        .setTitle(`Goodbye ${isPartial ? guildMember.name : guildMember.displayName}`)
+        .setTitle(`Goodbye ${isPartial ? memberOrUser.username : memberOrUser.displayName}`)
         .setColor(0xe24540) // red
         .setDescription(exitMessage);
 
