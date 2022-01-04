@@ -49,8 +49,12 @@ module.exports = {
         if (guildMember.partial) {
             // if partial, the member is already gone and fetching won't do anything (see also ./messageDelete.js)
             // instead, try and use whatever info is in the Partial data to send messages
-            await postExitMessage(guildMember.guild, guildMember.user, guildMember.partial)
-            .catch(err => console.error(err));
+            const user = guildMember.user;
+            const guild = guildMember.guild;
+            await user.fetch()
+                .catch(err => console.error(err));
+            await postExitMessage(guild, user, guildMember.partial)
+                .catch(err => console.error(err));
             return;
         }
 
