@@ -9,7 +9,11 @@ module.exports = {
     once: false,
     async execute(message) {
         if (message.partial) {
-            await message.fetch();
+            await message.fetch()
+                .catch(err => {
+                    console.error(err);
+                    return;
+                });
         }
 
         if (message.author.bot) {

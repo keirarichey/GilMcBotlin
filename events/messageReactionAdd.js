@@ -17,13 +17,11 @@ const addRoleFromEmojiMap = async function(reaction, member, emojiMap) {
         }
     */
     if (member.partial) {
-        try {
-            await member.fetch();
-        }
-        catch (err) {
-            console.error(err);
-            return;
-        }
+        await member.fetch()
+            .catch(err => {
+                console.error(err);
+                return;
+            });
     }
     
     const emojiKeys = Object.keys(emojiMap);

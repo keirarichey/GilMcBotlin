@@ -10,12 +10,11 @@ module.exports = {
     once: false,
     async execute(message) {
         if (message.partial) {
-            try {
-                await message.fetch();
-            } catch {
-                console.log("Partial Message deleted, no data can be retrieved");
-                return;
-            }
+            await message.fetch()
+                .catch(() => {
+                    console.log("Partial Message deleted, no data can be retrieved");
+                    return;
+                });
         }
         if (message.author.bot) {
             return;
