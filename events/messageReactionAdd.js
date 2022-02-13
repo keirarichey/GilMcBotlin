@@ -63,7 +63,6 @@ module.exports = {
                 console.error(err);
                 return;
             });
-        console.log(reactionGuildMember);
 
         const roleMessage = await RoleMessages.findOne({
             where: {
