@@ -42,6 +42,14 @@ module.exports = {
         if (user.bot) {
             return;
         }
+
+        if (user.partial) {
+            await user.fetch()
+                .catch(err => {
+                    console.error(err);
+                    return;
+                });
+        }
         
         if (messageReaction.partial) {
             await messageReaction.fetch()
