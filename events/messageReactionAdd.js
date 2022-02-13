@@ -58,7 +58,7 @@ module.exports = {
                 });
         }
 
-        const reactionGuildMember = await messageReaction.message.guild.members.fetch(member => member.id === user.id)
+        const reactionGuildMember = await messageReaction.message.guild.members.fetch(user.id)
             .then(member => {console.log(member)})
             .catch(err => {
                 console.error(err);
