@@ -59,11 +59,11 @@ module.exports = {
         }
 
         const reactionGuildMember = await messageReaction.message.guild.members.fetch(user.id)
-            .then(member => {console.log(member)})
             .catch(err => {
                 console.error(err);
                 return;
             });
+        console.log(reactionGuildMember);
 
         const roleMessage = await RoleMessages.findOne({
             where: {
