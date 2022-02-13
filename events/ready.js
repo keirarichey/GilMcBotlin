@@ -8,16 +8,16 @@ module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
+        // Set bot's activity on a 30-minute loop: this is to prevent it just disappearing
+        setInterval(() => {
+            client.user.setPresence({ activities: [{ type: 'PLAYING', name: `with ${new Date().getFullYear() + 1} AFL rules` }], status: 'online' });
+        }, 1800000);
+
         // Load all commands
         console.log();
         console.log(`--------------------------------------------------------`);
         console.log(`Logged in and successfully connected as ${client.user.username}.`);
         console.log(`Invite link: https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`);
-
-        // Set bot's activity on a 30-minute loop: this is to prevent it just disappearing
-        setInterval(() => {
-            client.user.setPresence({ activities: [{ type: 'PLAYING', name: `with ${new Date().getFullYear() + 1} AFL rules` }], status: 'online' });
-        }, 1800000);
 
         // Check database and initialise all tables if they don't exist
         const databaseTables = fs.readdirSync('./tables').filter(file => file.endsWith('.js'));
