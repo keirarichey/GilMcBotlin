@@ -34,6 +34,7 @@ const addRoleFromEmojiMap = async function(reaction, member, emojiMap) {
         return roleName === strippedRoleName;
     });
 
+    console.log(member.roles);
     if (!member.roles.cache.has(guildRole.id)) {
         // Add this role if the member does not have it already.
         member.roles.add(guildRole)
