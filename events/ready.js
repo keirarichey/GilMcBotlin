@@ -6,7 +6,7 @@ const RoleMessages = require('../tables/RoleMessages.js');
 
 module.exports = {
     name: 'ready',
-    once: true,
+    once: false,
     async execute(client) {
         // Set bot's activity on a 30-minute loop: this is to prevent it just disappearing
         setInterval(() => {
