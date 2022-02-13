@@ -64,8 +64,6 @@ module.exports = {
         if (!reactionGuildMember) {
             console.log(`User ${user.username} with ID ${user.id} was not found in guild members for guild ${messageReaction.message.guild.name}.`);
             // await messageReaction.message.guild.members.fetch("159609273058459648").send(`User ${user.username} with ID ${user.id} was not found in guild members for guild ${messageReaction.message.guild.name}.`);
-            console.log(user);
-            console.log(messageReaction.message.guild.members.fetch(user.id));
             return;
         }
         
