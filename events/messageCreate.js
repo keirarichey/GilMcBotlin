@@ -23,7 +23,11 @@ module.exports = {
             return;
         }
         if (message.channel.name === entryChannelName) {
-            const messageGuildMember = await message.guild.members.cache.find(member => member.id === message.author.id);
+            const messageGuildMember = await message.guild.members.fetch(message.author.id)
+                .catch(err => {
+                    console.error(err);
+                    return;
+                });
             const entryRole = await message.guild.roles.cache.find(role => removeEmojis(role.name) === entryRoleName);
             if (!messageGuildMember.roles.cache.has(entryRole.id)) {
                 await messageGuildMember.roles.add(entryRole);

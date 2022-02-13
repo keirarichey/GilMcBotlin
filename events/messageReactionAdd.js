@@ -57,7 +57,11 @@ module.exports = {
                 });
         }
 
-        const reactionGuildMember = await messageReaction.message.guild.members.cache.find(member => member.id === user.id);
+        const reactionGuildMember = await messageReaction.message.guild.members.fetch(member => member.id === user.id)
+            .catch(err => {
+                console.error(err);
+                return;
+            });
 
         const roleMessage = await RoleMessages.findOne({
             where: {

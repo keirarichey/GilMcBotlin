@@ -26,7 +26,11 @@ module.exports = {
             return;
         }
 
-        const messageGuildMember = await message.guild.members.cache.find(member => member.id === message.author.id);
+        const messageGuildMember = await message.guild.members.fetch(message.author.id)
+            .catch(err => {
+                console.error(err);
+                return;
+            });
         await messageGuildMember.fetch()
             .catch(err => {
                 console.error(err);
