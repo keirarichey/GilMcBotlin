@@ -16,6 +16,11 @@ module.exports = {
                     return;
                 });
         }
+        if (!message.author) {
+            console.log("Message has no author:");
+            console.log(message)
+            return;
+        }
         if (message.author.bot) {
             return;
         }
