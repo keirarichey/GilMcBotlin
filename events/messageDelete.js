@@ -1,24 +1,17 @@
 const { MessageEmbed } = require('discord.js');
 const { deletedMessageChannelName } = require('../config.json')
 
-const removeEmojis = function(str) {
-    return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
-}
-
 module.exports = {
     name: 'messageDelete',
     once: false,
     async execute(message) {
         if (message.partial) {
-            await message.fetch()
-                .catch(() => {
-                    console.log("Partial Message deleted, no data can be retrieved");
-                    return;
-                });
+            console.log("Partial Message deleted, no data can be retrieved");
+            return;
         }
         if (!message.author) {
             console.log("Message has no author:");
-            console.log(message)
+            console.log(message);
             return;
         }
         if (message.author.bot) {
