@@ -29,6 +29,10 @@ module.exports = {
                 console.error(err);
                 return;
             });
+        if (!messageGuildMember) {
+            return;
+        }
+        
         await messageGuildMember.fetch()
             .catch(err => {
                 console.error(err);
