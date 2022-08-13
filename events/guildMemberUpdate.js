@@ -46,7 +46,11 @@ module.exports = {
     once: false,
     async execute(oldMember, newMember) {
         if (oldMember.partial) {
+            await oldMember.fetch()
+                .catch(err => {
+                    console.error(err);
                     return;
+                });
         }
         if (newMember.partial) {
             await newMember.fetch()
