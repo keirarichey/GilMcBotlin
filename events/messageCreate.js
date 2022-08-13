@@ -80,7 +80,7 @@ module.exports = {
         }
 
         await messageGuildMember.roles.add(entryRole);
-        await postEntryMessage(newMember)
+        await postEntryMessage(messageGuildMember)
             .catch(err => console.error(err));
     }
 }
