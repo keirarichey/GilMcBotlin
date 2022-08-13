@@ -4,6 +4,8 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
 }
 
+const entryWordPattern = /[rR]\s?\/?\s?[aA]\s?[fF]\s?[lL]/g;
+
 module.exports = {
     name: 'messageCreate',
     once: false,
@@ -20,6 +22,9 @@ module.exports = {
             return;
         }
         if (!message.guild) {
+            return;
+        }
+        if (!message.content.match(entryWordPattern)) {
             return;
         }
         if (message.channel.name === entryChannelName) {
