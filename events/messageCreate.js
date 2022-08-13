@@ -60,23 +60,27 @@ module.exports = {
         if (!message.guild) {
             return;
         }
+        if (message.channel.name !== entryChannelName) {
+            return;
+        }
         if (!message.content.match(entryWordPattern)) {
             return;
         }
 
-        if (message.channel.name === entryChannelName) {
-            const messageGuildMember = await message.guild.members.fetch(message.author.id)
-                .catch(err => {
-                    console.error(err);
-                    return;
-                });
-            const entryRole = await message.guild.roles.cache.find(role => removeEmojis(role.name) === entryRoleName);
-            if (!messageGuildMember.roles.cache.has(entryRole.id)) {
-                await messageGuildMember.roles.add(entryRole);
-                await postEntryMessage(newMember)
-                    .catch(err => console.error(err));
-            }
-
+        const messageGuildMember = await message.guild.members.fetch(message.author.id)
+            .catch(err => {
+                console.error(err);
+                return;
+            });
+        const entryRole = await message.guild.roles.cache.find(role => removeEmojis(role.name) === entryRoleName);
+        if (messageGuildMember.roles.cache.has(entryRole.id)) {
+            /*  if the person messaging entry channel already has the role, they're probably a mod, and shouldn't
+                trigger a welcome if they say the entry word (e.g. to explain) */
+            return;
         }
+
+        await messageGuildMember.roles.add(entryRole);
+        await postEntryMessage(newMember)
+            .catch(err => console.error(err));
     }
 }
