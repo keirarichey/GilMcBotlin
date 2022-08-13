@@ -35,7 +35,6 @@ const postEntryMessage = async function(guildMember) {
     const welcomeMessage = welcomeMessages[randomWelcomeMessageIndex];
 
     const embed = new MessageEmbed()
-        .setTitle(`Welcome ${guildMember.displayName}`)
         .setColor(0x33b23b) // green
         .setDescription(welcomeMessage);
 
@@ -47,7 +46,7 @@ module.exports = {
     once: false,
     async execute(oldMember, newMember) {
         if (oldMember.partial) {
-            return;
+                    return;
         }
         if (newMember.partial) {
             await newMember.fetch()

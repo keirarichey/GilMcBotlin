@@ -23,14 +23,13 @@ const postExitMessage = async function(guild, memberOrUser, isPartial) {
     const exitMessageEmoji = exitMessageEmojis[randomexitEmojiIndex];
 
     const exitMessages = [
-        `**${exitMessageEmoji} ${memberOrUser.toString()} has left ${guild.name}. Let's all join in chairing them off.**`,
-        `**${exitMessageEmoji} ${memberOrUser.toString()} has retired from ${guild.name}. Let's celebrate their long and successful career by chairing them off.**`,
+        `**${exitMessageEmoji} ${isPartial ? memberOrUser.username : memberOrUser.displayName} has left ${guild.name}. Let's all join in chairing them off.**`,
+        `**${exitMessageEmoji} ${isPartial ? memberOrUser.username : memberOrUser.displayName} has retired from ${guild.name}. Let's celebrate their long and successful career by chairing them off.**`,
     ];
     const randomExitMessageIndex = Math.floor(exitMessages.length * Math.random());
     const exitMessage = exitMessages[randomExitMessageIndex];
 
     const embed = new MessageEmbed()
-        .setTitle(`Goodbye ${isPartial ? memberOrUser.username : memberOrUser.displayName}`)
         .setColor(0xe24540) // red
         .setDescription(exitMessage);
 
