@@ -1,4 +1,5 @@
 const { entryChannelName, entryRoleName, defaultChannelName, welcomeEmojiName  } = require('../config.json')
+const { MessageEmbed } = require('discord.js');
 
 const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
