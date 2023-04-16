@@ -8,13 +8,18 @@ const gameEmojis = require('../data/games.json');
 const pronounEmojis = require('../data/pronouns.json');
 const bblEmojis = require('../data/bbl.json');
 
-const removeEmojis = function(str) {
+const removeEmojis = async function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
 };
 
 const addDefaultReaction = async function(reactionMessage, emojiMap) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
-        if (!client.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
+        if (
+            !client.guild.roles.cache.some(role => {
+                const roleName = await removeEmojis(role.name);
+                return roleName === emojiInfo.roleName
+            })
+        ) {
             return;
         };
 
