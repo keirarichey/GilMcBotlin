@@ -12,7 +12,7 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
 };
 
-const addDefaultReaction = async function(reactionMessage, emojiMap) {
+const addDefaultReaction = async function(client, reactionMessage, emojiMap) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
         if (!client.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
             return;
@@ -70,13 +70,13 @@ module.exports = {
                     // ensure all reactions are added to the message
                     switch(RoleMessage.dataValues.roleType) {
                         case 'team':
-                            addDefaultReaction(cacheMessage, teamEmojis);
+                            addDefaultReaction(client, cacheMessage, teamEmojis);
                         case 'bbl':
-                            addDefaultReaction(cacheMessage, bblEmojis);
+                            addDefaultReaction(client, cacheMessage, bblEmojis);
                         case 'pronoun':
-                            addDefaultReaction(cacheMessage, pronounEmojis);
+                            addDefaultReaction(client, cacheMessage, pronounEmojis);
                         case 'game':
-                            addDefaultReaction(cacheMessage, gameEmojis);
+                            addDefaultReaction(client, cacheMessage, gameEmojis);
                     };
                     console.log(`Missing reactions added to RoleMessage ${cacheMessage.content}`);
                 })
