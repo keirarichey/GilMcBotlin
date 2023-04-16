@@ -3,6 +3,26 @@ const { DiscordAPIError } = require('discord.js');
 const { guildId, ownerId } = require('../config');
 const database = require('../database/database.js');
 const RoleMessages = require('../tables/RoleMessages.js');
+const teamEmojis = require('../data/teams.json');
+const gameEmojis = require('../data/games.json');
+const pronounEmojis = require('../data/pronouns.json');
+const bblEmojis = require('../data/bbl.json');
+
+const removeEmojis = function(str) {
+    return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
+};
+
+const addDefaultReaction = async function(reactionMessage, emojiMap) {
+    Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
+        if (!client.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
+            return;
+        };
+
+        const roleEmoji = await client.guild.emojis.cache.find(emoji => emoji.name === emojiName);
+        await reactionMessage.react(roleEmoji)
+            .catch(console.error);
+    });
+};
 
 module.exports = {
     name: 'ready',
@@ -46,7 +66,19 @@ module.exports = {
                     return cacheChannel.messages.fetch(RoleMessage.dataValues.messageId)
                 })
                 .then(cacheMessage => {
-                    console.log(`Fetched RoleMessage ${cacheMessage.content}`)
+                    console.log(`Fetched RoleMessage ${cacheMessage.content}`);
+                    // ensure all reactions are added to the message
+                    switch(RoleMessage.dataValues.roleType) {
+                        case 'team':
+                            await addDefaultReaction(cacheMessage, teamEmojis);
+                        case 'bbl':
+                            await addDefaultReaction(cacheMessage, bblEmojis);
+                        case 'pronoun':
+                            await addDefaultReaction(cacheMessage, pronounEmojis);
+                        case 'game':
+                            await addDefaultReaction(cacheMessage, gameEmojis);
+                    };
+                    console.log(`Missing reactions added to RoleMessage ${cacheMessage.content}`);
                 })
                 .catch(async err => {
                     if (err instanceof DiscordAPIError) {
