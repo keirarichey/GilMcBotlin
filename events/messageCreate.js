@@ -5,7 +5,7 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
 }
 
-const entryWordPattern = /[rR]\s?\/?\s?[aA]\s?[fF]\s?[lL]/g;
+const entryWordPattern = /[rR]{1}[^rR]*\/?[^rR\/]*[aA]{1}[^rR\/aA]*[fF]{1}[^rR\/aAfF]*[lL]{1}/gm;
 
 const postEntryMessage = async function(guildMember) {
     const guild = guildMember.guild;
