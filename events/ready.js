@@ -14,18 +14,19 @@ const removeEmojis = function(str) {
 
 const addDefaultReaction = async function(reactionMessage, emojiMap, isDefaultEmoji) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
-        if (!reactionMessage.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
+        if (reactionMessage.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
             return;
         };
 
         if (isDefaultEmoji) {
             await reactionMessage.react(emojiInfo.emoji);
+            return;
         } else {
             const roleEmoji = await reactionMessage.guild.emojis.cache.find(emoji => emoji.name === emojiName);
             await reactionMessage.react(roleEmoji)
                 .catch(console.error);
+            return;
         }
-        
     });
 };
 
