@@ -8,18 +8,13 @@ const gameEmojis = require('../data/games.json');
 const pronounEmojis = require('../data/pronouns.json');
 const bblEmojis = require('../data/bbl.json');
 
-const removeEmojis = async function(str) {
+const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
 };
 
 const addDefaultReaction = async function(reactionMessage, emojiMap) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
-        if (
-            !client.guild.roles.cache.some(role => {
-                const roleName = await removeEmojis(role.name);
-                return roleName === emojiInfo.roleName
-            })
-        ) {
+        if (!client.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
             return;
         };
 
@@ -75,13 +70,13 @@ module.exports = {
                     // ensure all reactions are added to the message
                     switch(RoleMessage.dataValues.roleType) {
                         case 'team':
-                            await addDefaultReaction(cacheMessage, teamEmojis);
+                            addDefaultReaction(cacheMessage, teamEmojis);
                         case 'bbl':
-                            await addDefaultReaction(cacheMessage, bblEmojis);
+                            addDefaultReaction(cacheMessage, bblEmojis);
                         case 'pronoun':
-                            await addDefaultReaction(cacheMessage, pronounEmojis);
+                            addDefaultReaction(cacheMessage, pronounEmojis);
                         case 'game':
-                            await addDefaultReaction(cacheMessage, gameEmojis);
+                            addDefaultReaction(cacheMessage, gameEmojis);
                     };
                     console.log(`Missing reactions added to RoleMessage ${cacheMessage.content}`);
                 })
