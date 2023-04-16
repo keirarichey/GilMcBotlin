@@ -12,15 +12,20 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
 };
 
-const addDefaultReaction = async function(reactionMessage, emojiMap) {
+const addDefaultReaction = async function(reactionMessage, emojiMap, isDefaultEmoji) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
         if (!reactionMessage.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
             return;
         };
 
-        const roleEmoji = await reactionMessage.guild.emojis.cache.find(emoji => emoji.name === emojiName);
-        await reactionMessage.react(roleEmoji)
-            .catch(console.error);
+        if (isDefaultEmoji) {
+            await reactionMessage.react(emojiInfo.emoji);
+        } else {
+            const roleEmoji = await reactionMessage.guild.emojis.cache.find(emoji => emoji.name === emojiName);
+            await reactionMessage.react(roleEmoji)
+                .catch(console.error);
+        }
+        
     });
 };
 
@@ -70,13 +75,13 @@ module.exports = {
                     // ensure all reactions are added to the message
                     switch(RoleMessage.dataValues.roleType) {
                         case 'team':
-                            addDefaultReaction(cacheMessage, teamEmojis);
+                            addDefaultReaction(cacheMessage, teamEmojis, false);
                         case 'bbl':
-                            addDefaultReaction(cacheMessage, bblEmojis);
+                            addDefaultReaction(cacheMessage, bblEmojis, true);
                         case 'pronoun':
-                            addDefaultReaction(cacheMessage, pronounEmojis);
+                            addDefaultReaction(cacheMessage, pronounEmojis, true);
                         case 'game':
-                            addDefaultReaction(cacheMessage, gameEmojis);
+                            addDefaultReaction(cacheMessage, gameEmojis, true);
                     };
                     console.log(`Missing reactions added to RoleMessage ${cacheMessage.content}`);
                 })
