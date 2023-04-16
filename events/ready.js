@@ -108,7 +108,7 @@ module.exports = {
         client.ownerCommands.each(async ownerCommand =>{
             const guildCommand = await client.guilds.cache.get(guildId).commands.fetch()
                 .then(commands => commands.find(command => command.name === ownerCommand.data.name));
-            await guild.commands.permissions.add({ command: guildCommand.id, permissions: ownerPermissions });
+            // await guild.commands.permissions.add({ command: guildCommand.id, permissions: ownerPermissions });
         });
 
         console.log(`--------------------------------------------------------`);
