@@ -19,7 +19,8 @@ const addDefaultReaction = async function(reactionMessage, emojiMap, isDefaultEm
         };
 
         if (isDefaultEmoji) {
-            await reactionMessage.react(emojiInfo.emoji);
+            await reactionMessage.react(emojiInfo.emoji)
+                .catch(console.error);
             return;
         } else {
             const roleEmoji = await reactionMessage.guild.emojis.cache.find(emoji => emoji.name === emojiName);
