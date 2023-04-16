@@ -12,13 +12,13 @@ const removeEmojis = function(str) {
     return str.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ':').trim();
 };
 
-const addDefaultReaction = async function(client, reactionMessage, emojiMap) {
+const addDefaultReaction = async function(reactionMessage, emojiMap) {
     Object.entries(emojiMap).forEach(async ([emojiName, emojiInfo]) => {
-        if (!client.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
+        if (!reactionMessage.guild.roles.cache.some(role => removeEmojis(role.name) === emojiInfo.roleName)) {
             return;
         };
 
-        const roleEmoji = await client.guild.emojis.cache.find(emoji => emoji.name === emojiName);
+        const roleEmoji = await reactionMessage.guild.emojis.cache.find(emoji => emoji.name === emojiName);
         await reactionMessage.react(roleEmoji)
             .catch(console.error);
     });
@@ -70,13 +70,13 @@ module.exports = {
                     // ensure all reactions are added to the message
                     switch(RoleMessage.dataValues.roleType) {
                         case 'team':
-                            addDefaultReaction(client, cacheMessage, teamEmojis);
+                            addDefaultReaction(cacheMessage, teamEmojis);
                         case 'bbl':
-                            addDefaultReaction(client, cacheMessage, bblEmojis);
+                            addDefaultReaction(cacheMessage, bblEmojis);
                         case 'pronoun':
-                            addDefaultReaction(client, cacheMessage, pronounEmojis);
+                            addDefaultReaction(cacheMessage, pronounEmojis);
                         case 'game':
-                            addDefaultReaction(client, cacheMessage, gameEmojis);
+                            addDefaultReaction(cacheMessage, gameEmojis);
                     };
                     console.log(`Missing reactions added to RoleMessage ${cacheMessage.content}`);
                 })
